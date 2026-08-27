@@ -1,9 +1,24 @@
-# Ignore Python virtual environments
-venv/
-.venv/
-env/
+# Python
 __pycache__/
-*.pyc
-.DS_Store
-.env
+*.py[cod]
+
+# Virtual environment
+.venv/
+venv/
+
+# Data
+data/
+
+# Model checkpoints
 checkpoints/
+*.pt
+*.pth
+
+# Test images
+test_image.png
+
+# Environment files
+.env
+
+# macOS
+.DS_Store
