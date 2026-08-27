@@ -1,0 +1,25 @@
+# ---------- Stage 1 : Install dependencies ----------
+FROM python:3.11-slim AS base
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+COPY requirements/train.txt .
+
+RUN pip install --upgrade pip && \
+    pip install -r train.txt
+
+# ---------- Stage 2 : Training image ----------
+FROM base AS training
+
+WORKDIR /app
+
+COPY src/ ./src/
+COPY configs/ ./configs/
+
+RUN mkdir -p /app/data /app/checkpoints
+
+ENTRYPOINT ["python", "src/train.py"]
